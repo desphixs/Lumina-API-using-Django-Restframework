@@ -16,7 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+# We import our QuoteList view from the 'quotes' app.
+# The 'as_view()' part is needed because QuoteList is a "Class-Based View".
+from quotes.views import QuoteList
 
+# The 'urlpatterns' list is like a "GPS map" for your website. 
+# It tells Django: "When a user visits this specific web address (URL), 
+# take them to this specific view (the logic)."
 urlpatterns = [
+    # This path is the entry door for the Admin dashboard.
     path('admin/', admin.site.urls),
+    
+    # This path points to our list of quotes.
+    # When a user visits 'http://127.0.0.1:8000/api/quotes/', 
+    # Django will call our QuoteList view to handle the request.
+    # Analogy: This is like putting a "Quotes Section" sign on a specific 
+    # aisle in a store so customers know exactly where to go.
+    path('api/quotes/', QuoteList.as_view()),
 ]
